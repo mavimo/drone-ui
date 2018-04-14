@@ -7,3 +7,12 @@ pipeline:
       - yarn run test
       - yarn run lint
       - yarn run build
+
+  publish-image:
+    image: plugins/docker
+    repo: mavimo/drone-ui
+    dockerfile: Dockerfile
+    secrets: [docker_username, docker_password]
+    tags:
+      - ${DRONE_COMMIT:0:8}
+      - ${DRONE_COMMIT}
