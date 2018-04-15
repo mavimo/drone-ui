@@ -25,6 +25,4 @@ pipeline:
       - ${DRONE_BRANCH}
     when:
       branch:
-        - 195-paged
-        - 191-promote-build
-        - 200-secret-event-config
+        - next
