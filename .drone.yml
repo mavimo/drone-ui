@@ -15,4 +15,16 @@ pipeline:
     secrets: [docker_username, docker_password]
     tags:
       - ${DRONE_COMMIT:0:8}
-      - ${DRONE_COMMIT}
+
+  publish-image:
+    image: plugins/docker
+    repo: mavimo/drone-ui
+    dockerfile: Dockerfile
+    secrets: [docker_username, docker_password]
+    tags:
+      - ${DRONE_BRANCH}
+    when:
+      branch:
+        - 195-paged
+        - 191-promote-build
+        - 200-secret-event-config
