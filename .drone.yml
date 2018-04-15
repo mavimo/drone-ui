@@ -3,12 +3,24 @@ pipeline:
     image: node:8
     commands:
       - yarn install
+
+  lint:
+    image: node:8
+    commands:
       - yarn run lesshint
-      - yarn run test
       - yarn run lint
+
+  test:
+    image: node:8
+    commands:
+      - yarn run test
+
+  build:
+    image: node:8
+    commands:
       - yarn run build
 
-  publish-image:
+  publish-image-current:
     image: plugins/docker
     repo: mavimo/drone-ui
     dockerfile: Dockerfile
@@ -16,7 +28,7 @@ pipeline:
     tags:
       - ${DRONE_COMMIT:0:8}
 
-  publish-image:
+  publish-image-next:
     image: plugins/docker
     repo: mavimo/drone-ui
     dockerfile: Dockerfile
